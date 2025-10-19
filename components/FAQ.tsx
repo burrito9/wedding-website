@@ -10,7 +10,17 @@ const faqData = [
     question: "Do I need to rent a car?",
     answer: (
         <>
-            No, there will be transportation from The Octant to all official events. However, if you want to explore the island (and we suggest you do), a car makes it much easier. Manual transmission cars are much cheaper and more common (~80-90 euro/day). Automatic cars will go quickly and are about 2x the price. If you can drive a stick, do it. <a href="https://savedspots.com/posts/quick-guide-renting-a-car-in-the-azores" target="_blank" rel="noopener noreferrer" className="text-brand-orange underline hover:text-orange-700">Check out this link for more info</a>.
+            <p>
+                No, there will be transportation from The Octant to all official events. However, if you want to explore the island (and we suggest you do), a car makes it much easier. <a href="https://savedspots.com/posts/quick-guide-renting-a-car-in-the-azores" target="_blank" rel="noopener noreferrer" className="text-brand-orange underline hover:text-orange-700">Check out this link for more info</a>.
+            </p>
+            <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="font-semibold text-gray-700">
+                    We have secured a discount with a local car rental company!
+                </p>
+                <p className="mt-2">
+                    Use promo code <strong className="font-bold text-brand-orange text-lg tracking-wider bg-orange-50 px-2 py-1 rounded">#glamazores</strong> when booking with <a href="https://autatlantis.com/" target="_blank" rel="noopener noreferrer" className="text-brand-orange underline hover:text-orange-700">Autatlantis Rent-a-Car</a>.
+                </p>
+            </div>
         </>
     )
   },
