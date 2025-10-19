@@ -4,7 +4,7 @@ import Heart from './Heart';
 const faqData = [
   {
     question: "Do I need to stay at The Octant?",
-    answer: "No, and here are some other options. However, the Sunset party will be at the hotel, it has free breakfast, and transportation will all be coordinated from there. Best to be close! There are tons of Airbnbs and hotels on the island. We’ll provide some recommendations on our website."
+    answer: "No. However, the Sunset party will be at the hotel, it has free breakfast, and transportation will all be coordinated from there. Best to be close! There are tons of Airbnbs and hotels on the island. We’ll provide some recommendations on our website."
   },
   {
     question: "Do I need to rent a car?",
