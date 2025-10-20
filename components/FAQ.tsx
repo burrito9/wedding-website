@@ -63,10 +63,6 @@ const faqData = [
     answer: "We are only able to accomodate those listed on your invitation. Thank you for understanding."
   },
   {
-    question: "Is there a registry?",
-    answer: "Your presence is the best gift we could ask for, and we know many are traveling far and wide to attend our wedding. If you are considering a gift, we will include a registry on our website at some point."
-  },
-  {
     question: "What’s the weather like? What should I pack?",
     answer: (
         <>

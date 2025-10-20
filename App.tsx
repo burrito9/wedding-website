@@ -49,7 +49,7 @@ const App: React.FC = () => {
           <section id="rsvp" className="scroll-mt-20">
             <RSVP />
           </section>
-
+          
           <FAQ />
           <Footer />
         </div>

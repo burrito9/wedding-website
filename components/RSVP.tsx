@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // The new URL for the deployed Google Apps Script.
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw540fQhdaDiOuuDaurJZEjgQL2TbZrKa0hR0aAMdiNno2ecPb5Y-8bSr4_rFsFFoM/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFTQDIyQxr9qso_o0EA6eqCnI1B1F-ySzD7vZ5q2ZDWllwDHbSTb-asj5X8x2xnF8W/exec';
 
 type FormState = {
     name: string;

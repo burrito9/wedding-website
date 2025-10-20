@@ -8,8 +8,8 @@ const Navbar: React.FC = () => {
         { name: 'Stay', href: '#stay' },
         { name: 'Weekend', href: '#weekend' },
         { name: 'Wedding Day', href: '#wedding-day' },
-        { name: 'FAQs', href: '#faq' },
         { name: 'RSVP', href: '#rsvp' },
+        { name: 'FAQs', href: '#faq' },
     ];
 
     return (
