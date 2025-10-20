@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // The URL for the deployed Google Apps Script. It handles both GET and POST.
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwA9lTj4x7nNZODMHkQyrDkY4Yl7skDkZIJrnqTk92p5uqC5ko9aNaz5Xerw9r9sKtZ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygA4iuGdrdtgtXCVI_074UGwBzla2IE2XONixfN0T5sx0Fbz1VNQza-cTjIrc06r8c/exec';
 
 type FormState = {
     name: string;
@@ -219,21 +219,26 @@ const RSVP: React.FC = () => {
                     <div className="space-y-6 transition-all duration-500">
                         <div>
                             <label htmlFor="guests" className="block text-sm font-medium text-gray-700 font-montserrat">Number in Party</label>
-                            <select name="guests" id="guests" value={formData.guests} onChange={handleChange} disabled={isPartyOfOne || isCouple} className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-brand-orange focus:border-brand-orange sm:text-sm rounded-md disabled:bg-gray-100 disabled:cursor-not-allowed">
-                                {isCouple ? (
-                                    <option value="2">2 (For your party)</option>
-                                ) : canBringGuest ? (
-                                    <>
+                            {isCouple ? (
+                                <div className="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md text-gray-700 sm:text-sm cursor-not-allowed">
+                                   2 ({verifiedGuest.primaryGuest} &amp; {verifiedGuest.secondaryGuest})
+                                </div>
+                            ) : (
+                                <select name="guests" id="guests" value={formData.guests} onChange={handleChange} disabled={isPartyOfOne} className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-brand-orange focus:border-brand-orange sm:text-sm rounded-md disabled:bg-gray-100 disabled:cursor-not-allowed">
+                                    {canBringGuest ? (
+                                        <>
+                                            <option value="1">1 (Just Me)</option>
+                                            <option value="2">2 (Me + My Guest)</option>
+                                        </>
+                                    ) : (
                                         <option value="1">1 (Just Me)</option>
-                                        <option value="2">2 (Me + My Guest)</option>
-                                    </>
-                                ) : (
-                                    <option value="1">1 (Just Me)</option>
-                                )}
-                            </select>
-                             {(isPartyOfOne || isCouple) && (
+                                    )}
+                                </select>
+                            )}
+                            
+                            {isPartyOfOne && (
                                 <p className="mt-1 text-xs text-gray-500">
-                                    {isCouple ? `Your invitation is for ${verifiedGuest.primaryGuest} and ${verifiedGuest.secondaryGuest}.` : 'Your invitation is for yourself only.'}
+                                    Your invitation is for yourself only.
                                 </p>
                             )}
                         </div>
