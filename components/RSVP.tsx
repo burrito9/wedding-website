@@ -82,36 +82,29 @@ const RSVP: React.FC = () => {
         setErrors({});
         setPostSubmitMessage('');
         setIsSuccess(false);
-
+        
+        // This is a "fire-and-forget" submission. We won't get a response back
+        // from the server due to CORS limitations with Google Apps Script,
+        // so we'll assume success if the request doesn't throw a network error.
         try {
-            const response = await fetch(SCRIPT_URL, {
+            await fetch(SCRIPT_URL, {
                 method: 'POST',
+                mode: 'no-cors', // This prevents the browser from blocking the request due to CORS
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
+            
+            // Assume success
+            setPostSubmitMessage("Thank you! Your RSVP has been submitted successfully.");
+            setIsSuccess(true);
+            setFormData(initialFormState);
 
-            if (response.ok) {
-                const result = await response.json();
-                if (result.status === 'success') {
-                    setPostSubmitMessage("Thank you! Your RSVP has been successfully recorded.");
-                    setIsSuccess(true);
-                    setFormData(initialFormState);
-                } else {
-                    setPostSubmitMessage(`We're sorry, there was an issue: ${result.message}. Please try again.`);
-                    setIsSuccess(false);
-                    console.error('Script Error:', result.message);
-                }
-            } else {
-                 const responseText = await response.text();
-                 console.error("RSVP Submission HTTP Error:", response.status, response.statusText, responseText);
-                 setPostSubmitMessage(`We're sorry, there was a server error (${response.status}). Please try again or contact us directly.`);
-                 setIsSuccess(false);
-            }
         } catch (error: any) {
             console.error("RSVP Submission Fetch Error:", error);
-            setPostSubmitMessage(`We're sorry, there was a network error. Please check your connection and try again.`);
+            // This will only catch network-level errors, not server errors.
+            setPostSubmitMessage(`We're sorry, there was a network error. Please check your connection and try again, or contact us directly.`);
             setIsSuccess(false);
         } finally {
             setIsProcessing(false);
