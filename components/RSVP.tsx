@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // The new URL for the deployed Google Apps Script.
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFTQDIyQxr9qso_o0EA6eqCnI1B1F-ySzD7vZ5q2ZDWllwDHbSTb-asj5X8x2xnF8W/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNesTH0zAnRt2XJyPk3dGhTztmtSA7dnZOTOw0PSS4DV0aAVcWvkM_C20rUQIMOp38/exec';
 
 type FormState = {
     name: string;
@@ -77,7 +77,9 @@ const RSVP: React.FC = () => {
         if (!validate()) {
             return;
         }
-
+        
+        // FIX: Removed obsolete check for placeholder Google Script URL which was causing a TypeScript error.
+        
         setIsProcessing(true);
         setErrors({});
         setPostSubmitMessage('');
@@ -87,7 +89,6 @@ const RSVP: React.FC = () => {
         Object.entries(formData).forEach(([key, value]) => {
           data.append(key, value as string);
         });
-        data.append('timestamp', new Date().toISOString());
         
         // Log data for debugging purposes
         console.log('Submitting RSVP data:', Object.fromEntries(data.entries()));
