@@ -83,15 +83,14 @@ const RSVP: React.FC = () => {
         setPostSubmitMessage('');
         setIsSuccess(false);
         
-        const data = new FormData();
-        // Append form data
+        const data = new URLSearchParams();
         Object.entries(formData).forEach(([key, value]) => {
-          // FIX: The value from Object.entries is of type 'unknown' which is not assignable to the 'string | Blob'
-          // type expected by `data.append`. We cast it to string since all `formData` values are strings.
           data.append(key, value as string);
         });
-        // Add a timestamp for easier tracking in the Google Sheet
         data.append('timestamp', new Date().toISOString());
+        
+        // Log data for debugging purposes
+        console.log('Submitting RSVP data:', Object.fromEntries(data.entries()));
 
         try {
             await fetch(SCRIPT_URL, {
