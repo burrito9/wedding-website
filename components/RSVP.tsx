@@ -83,27 +83,29 @@ const RSVP: React.FC = () => {
         setPostSubmitMessage('');
         setIsSuccess(false);
         
-        // This is a "fire-and-forget" submission. We won't get a response back
-        // from the server due to CORS limitations with Google Apps Script,
-        // so we'll assume success if the request doesn't throw a network error.
+        const data = new FormData();
+        // Append form data
+        Object.entries(formData).forEach(([key, value]) => {
+          // FIX: The value from Object.entries is of type 'unknown' which is not assignable to the 'string | Blob'
+          // type expected by `data.append`. We cast it to string since all `formData` values are strings.
+          data.append(key, value as string);
+        });
+        // Add a timestamp for easier tracking in the Google Sheet
+        data.append('timestamp', new Date().toISOString());
+
         try {
             await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // This prevents the browser from blocking the request due to CORS
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
+                mode: 'no-cors',
+                body: data,
             });
             
-            // Assume success
             setPostSubmitMessage("Thank you! Your RSVP has been submitted successfully.");
             setIsSuccess(true);
             setFormData(initialFormState);
 
         } catch (error: any) {
             console.error("RSVP Submission Fetch Error:", error);
-            // This will only catch network-level errors, not server errors.
             setPostSubmitMessage(`We're sorry, there was a network error. Please check your connection and try again, or contact us directly.`);
             setIsSuccess(false);
         } finally {
