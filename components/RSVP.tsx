@@ -220,9 +220,10 @@ const RSVP: React.FC = () => {
                         <div>
                             <label htmlFor="guests" className="block text-sm font-medium text-gray-700 font-montserrat">Number in Party</label>
                             {isCouple ? (
-                                <div className="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-200 rounded-md text-gray-700 sm:text-sm cursor-not-allowed">
-                                   2 ({verifiedGuest.primaryGuest} &amp; {verifiedGuest.secondaryGuest})
-                                </div>
+                                <select name="guests" id="guests" value={formData.guests} onChange={handleChange} className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-brand-orange focus:border-brand-orange sm:text-sm rounded-md">
+                                    <option value="2">2 (Both of us)</option>
+                                    <option value="1">1 (Just one of us)</option>
+                                </select>
                             ) : (
                                 <select name="guests" id="guests" value={formData.guests} onChange={handleChange} disabled={isPartyOfOne} className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-brand-orange focus:border-brand-orange sm:text-sm rounded-md disabled:bg-gray-100 disabled:cursor-not-allowed">
                                     {canBringGuest ? (
@@ -258,7 +259,6 @@ const RSVP: React.FC = () => {
                     <textarea name="dietary" id="dietary" rows={3} value={formData.dietary} onChange={handleChange} className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-orange focus:border-brand-orange sm:text-sm" placeholder="Let us know of any allergies or dietary needs for your party."></textarea>
                 </div>
                 <div>
-                    {postSubmitMessage && <p className={`mb-4 text-sm text-center font-semibold ${isSuccess ? 'text-green-700' : 'text-red-600'}`}>{postSubmitMessage}</p>}
                      <button type="submit" disabled={isProcessing} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-white bg-brand-orange hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-orange disabled:bg-orange-300 disabled:cursor-not-allowed transition-colors duration-300 font-montserrat">
                         {isProcessing ? 'Submitting...' : 'Submit RSVP'}
                     </button>
@@ -271,37 +271,58 @@ const RSVP: React.FC = () => {
         <section className="flex flex-col items-center space-y-6 w-full">
             <h2 className="font-gaegu text-4xl sm:text-5xl text-gray-800">RSVP</h2>
             <div className="w-full max-w-2xl bg-white/60 p-6 sm:p-8 rounded-lg shadow-md text-left">
-                {!verifiedGuest ? (
-                    <form onSubmit={handleNameVerification} className="space-y-4">
-                        <h3 className="text-lg font-semibold text-gray-800 font-montserrat">Find Your Invitation</h3>
-                        <p className="text-sm text-gray-600">Please enter your full name to begin.</p>
-                        <div>
-                            <label htmlFor="name-verify" className="block text-sm font-medium text-gray-700 font-montserrat sr-only">Full Name</label>
-                            <input
-                                type="text"
-                                name="name-verify"
-                                id="name-verify"
-                                value={nameToVerify}
-                                onChange={(e) => {
-                                    setNameToVerify(e.target.value);
-                                    if(errors.verification) setErrors({});
-                                }}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-orange focus:border-brand-orange sm:text-sm"
-                                required
-                                placeholder="Your Full Name"
-                                disabled={isLoadingGuestList}
-                            />
+                {isSuccess && postSubmitMessage ? (
+                    <div className="text-center">
+                        <div className="p-4 rounded-md bg-green-100 text-green-800 font-semibold">
+                            {postSubmitMessage}
                         </div>
-                        {errors.verification && <p className="mt-2 text-sm text-red-600">{errors.verification}</p>}
-                        <button
-                            type="submit"
-                            disabled={isLoadingGuestList || !nameToVerify}
-                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-white bg-brand-orange hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-orange disabled:bg-orange-300 disabled:cursor-not-allowed transition-colors duration-300 font-montserrat"
-                        >
-                            {isLoadingGuestList ? 'Loading Guest List...' : 'Find My Invitation'}
-                        </button>
-                    </form>
-                ) : renderRsvpForm()}
+                        <img 
+                            src="https://i.imgur.com/BxThqZW.jpeg" 
+                            alt="Mila and Roberto celebrating"
+                            className="mt-6 w-48 h-48 object-cover rounded-lg mx-auto shadow-md"
+                        />
+                    </div>
+                ) : (
+                    <>
+                        {postSubmitMessage && !isSuccess && (
+                             <div className={`mb-4 p-4 rounded-md text-center font-semibold bg-red-100 text-red-800`}>
+                                {postSubmitMessage}
+                            </div>
+                        )}
+                        {!verifiedGuest ? (
+                            <form onSubmit={handleNameVerification} className="space-y-4">
+                                <h3 className="text-lg font-semibold text-gray-800 font-montserrat">Find Your Invitation</h3>
+                                <p className="text-sm text-gray-600">Please enter your full name to begin.</p>
+                                <div>
+                                    <label htmlFor="name-verify" className="block text-sm font-medium text-gray-700 font-montserrat sr-only">Full Name</label>
+                                    <input
+                                        type="text"
+                                        name="name-verify"
+                                        id="name-verify"
+                                        value={nameToVerify}
+                                        onChange={(e) => {
+                                            setNameToVerify(e.target.value);
+                                            if(errors.verification) setErrors({});
+                                            if(postSubmitMessage) setPostSubmitMessage('');
+                                        }}
+                                        className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-orange focus:border-brand-orange sm:text-sm"
+                                        required
+                                        placeholder="Your Full Name"
+                                        disabled={isLoadingGuestList}
+                                    />
+                                </div>
+                                {errors.verification && <p className="mt-2 text-sm text-red-600">{errors.verification}</p>}
+                                <button
+                                    type="submit"
+                                    disabled={isLoadingGuestList || !nameToVerify}
+                                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-bold text-white bg-brand-orange hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-orange disabled:bg-orange-300 disabled:cursor-not-allowed transition-colors duration-300 font-montserrat"
+                                >
+                                    {isLoadingGuestList ? 'Loading Guest List...' : 'Find My Invitation'}
+                                </button>
+                            </form>
+                        ) : renderRsvpForm()}
+                    </>
+                )}
             </div>
         </section>
     );
