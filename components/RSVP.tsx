@@ -10,6 +10,7 @@ type FormState = {
     guests: string;
     plusOneName: string;
     dietary: string;
+    attendingGuestName: string;
 };
 
 type Guest = {
@@ -30,7 +31,8 @@ const RSVP: React.FC = () => {
         attending: '',
         guests: '1',
         plusOneName: '',
-        dietary: ''
+        dietary: '',
+        attendingGuestName: '',
     };
     const [formData, setFormData] = useState<FormState>(initialFormState);
     const [errors, setErrors] = useState<Errors>({});
@@ -109,6 +111,9 @@ const RSVP: React.FC = () => {
             if (formData.guests === '2' && canBringGuest && !formData.plusOneName.trim()) {
                  newErrors.plusOneName = "Please enter your guest's full name.";
             }
+            if (isCouple && formData.guests === '1' && !formData.attendingGuestName.trim()) {
+                newErrors.attendingGuestName = 'Please select which guest will be attending.';
+            }
         }
 
         setErrors(newErrors);
@@ -120,8 +125,13 @@ const RSVP: React.FC = () => {
         
         const newFormData = { ...formData, [name]: value };
 
-        if (name === 'guests' && value === '1') {
-            newFormData.plusOneName = '';
+        if (name === 'guests') {
+            if (value === '1') {
+                newFormData.plusOneName = '';
+            }
+             if (value === '2' && !!verifiedGuest?.secondaryGuest) {
+                newFormData.attendingGuestName = '';
+            }
         }
 
         setFormData(newFormData);
@@ -133,7 +143,7 @@ const RSVP: React.FC = () => {
         const isCouple = !!(verifiedGuest && verifiedGuest.secondaryGuest);
 
         if (attendingValue === 'no') {
-            setFormData(prev => ({ ...prev, attending: attendingValue, guests: isCouple ? '2' : '1', plusOneName: '' }));
+            setFormData(prev => ({ ...prev, attending: attendingValue, guests: isCouple ? '2' : '1', plusOneName: '', attendingGuestName: '' }));
         } else {
             setFormData(prev => ({ ...prev, attending: attendingValue }));
         }
@@ -243,6 +253,23 @@ const RSVP: React.FC = () => {
                                 </p>
                             )}
                         </div>
+
+                        {isCouple && formData.guests === '1' && (
+                            <fieldset className="transition-opacity duration-500">
+                                <legend className="text-sm font-medium text-gray-700 font-montserrat">Who will be attending?</legend>
+                                <div className="mt-2 space-y-2">
+                                    <div className="flex items-center">
+                                        <input id="guest-primary" name="attendingGuestName" type="radio" value={verifiedGuest.primaryGuest} onChange={handleChange} checked={formData.attendingGuestName === verifiedGuest.primaryGuest} className="focus:ring-brand-orange h-4 w-4 text-brand-orange border-gray-300" />
+                                        <label htmlFor="guest-primary" className="ml-3 block text-sm font-medium text-gray-700">{verifiedGuest.primaryGuest}</label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input id="guest-secondary" name="attendingGuestName" type="radio" value={verifiedGuest.secondaryGuest} onChange={handleChange} checked={formData.attendingGuestName === verifiedGuest.secondaryGuest} className="focus:ring-brand-orange h-4 w-4 text-brand-orange border-gray-300" />
+                                        <label htmlFor="guest-secondary" className="ml-3 block text-sm font-medium text-gray-700">{verifiedGuest.secondaryGuest}</label>
+                                    </div>
+                                </div>
+                                {errors.attendingGuestName && <p className="mt-2 text-sm text-red-600">{errors.attendingGuestName}</p>}
+                            </fieldset>
+                        )}
                         
                         {formData.guests === '2' && canBringGuest && (
                              <div className="transition-opacity duration-500">
@@ -279,7 +306,7 @@ const RSVP: React.FC = () => {
                         <img 
                             src="https://i.imgur.com/BxThqZW.jpeg" 
                             alt="Mila and Roberto celebrating"
-                            className="mt-6 w-48 h-48 object-cover rounded-lg mx-auto shadow-md"
+                            className="mt-6 w-60 h-60 object-cover rounded-lg mx-auto shadow-md"
                         />
                     </div>
                 ) : (
