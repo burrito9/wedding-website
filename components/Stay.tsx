@@ -51,8 +51,8 @@ const Stay: React.FC = () => {
             </div>
              <div className="w-full aspect-video sm:aspect-[2/1] max-w-2xl rounded-lg overflow-hidden shadow-lg">
                 <img 
-                    src="https://image-tc.galaxy.tf/wijpeg-3520dx7ercgmvp0buxpg6f213/4.jpg?width=1600&height=900" 
-                    alt="Scenic view of Octant Hotels Furnas" 
+                    src="https://media.cntraveller.com/photos/64c8f00185033ddee17cab44/16:9/w_2240,c_limit/Azores-GettyImages-944487332.jpeg" 
+                    alt="Scenic view of the Azores coast" 
                     className="w-full h-full object-cover"
                 />
             </div>
