@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // The new URL for the deployed Google Apps Script.
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNesTH0zAnRt2XJyPk3dGhTztmtSA7dnZOTOw0PSS4DV0aAVcWvkM_C20rUQIMOp38/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx0DqgIv9LjD0Y1ccXhV1gj6bSeFMJANvYIyRtZ1iuMlfn8xWWJE-XPDDWYzn2EpdmN/exec';
 
 type FormState = {
     name: string;
@@ -78,35 +78,36 @@ const RSVP: React.FC = () => {
             return;
         }
         
-        // FIX: Removed obsolete check for placeholder Google Script URL which was causing a TypeScript error.
-        
         setIsProcessing(true);
         setErrors({});
         setPostSubmitMessage('');
         setIsSuccess(false);
         
-        const data = new URLSearchParams();
+        const data = new FormData();
         Object.entries(formData).forEach(([key, value]) => {
           data.append(key, value as string);
         });
         
-        // Log data for debugging purposes
-        console.log('Submitting RSVP data:', Object.fromEntries(data.entries()));
-
         try {
-            await fetch(SCRIPT_URL, {
+            const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors',
                 body: data,
             });
-            
-            setPostSubmitMessage("Thank you! Your RSVP has been submitted successfully.");
-            setIsSuccess(true);
-            setFormData(initialFormState);
+
+            if (response.ok) {
+                setPostSubmitMessage("Thank you! Your RSVP has been submitted successfully.");
+                setIsSuccess(true);
+                setFormData(initialFormState);
+            } else {
+                const errorText = await response.text();
+                console.error("Google Script execution error:", errorText);
+                setPostSubmitMessage("An error occurred while submitting. Please try again.");
+                setIsSuccess(false);
+            }
 
         } catch (error: any) {
             console.error("RSVP Submission Fetch Error:", error);
-            setPostSubmitMessage(`We're sorry, there was a network error. Please check your connection and try again, or contact us directly.`);
+            setPostSubmitMessage(`A network error occurred. Please check your connection and try again.`);
             setIsSuccess(false);
         } finally {
             setIsProcessing(false);
