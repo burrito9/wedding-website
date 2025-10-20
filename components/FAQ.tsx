@@ -4,7 +4,22 @@ import Heart from './Heart';
 const faqData = [
   {
     question: "Do I need to stay at The Octant?",
-    answer: "No. However, the Sunset party will be at the hotel, it has free breakfast, and transportation will all be coordinated from there. Best to be close! There are tons of Airbnbs and hotels on the island. We’ll provide some recommendations on our website."
+    answer: (
+        <>
+            <p>
+                No. However, the Sunset party will be at the hotel, it has free breakfast, and transportation will all be coordinated from there. Best to be close! There are tons of Airbnbs and hotels on the island. We’ll provide some recommendations on our website.
+            </p>
+            <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="font-semibold text-gray-700">
+                    Block Pricing: September 4-7
+                </p>
+                <ul className="list-disc list-inside mt-2 space-y-1 text-gray-600">
+                    <li>Single (one person in room): 310 euro/night</li>
+                    <li>Double (two people in room): 330 euro/night</li>
+                </ul>
+            </div>
+        </>
+    )
   },
   {
     question: "Do I need to rent a car?",

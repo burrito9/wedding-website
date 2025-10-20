@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-// IMPORTANT: After deploying your Google Apps Script, paste the Web App URL here.
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKeBY316xs3Gl1A2F1qFVFBGY7LS7R1nXjwPpQQFN_rok9pgNoezk9067Q6nkwEFyl/exec';
+// The new URL for the deployed Google Apps Script.
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw540fQhdaDiOuuDaurJZEjgQL2TbZrKa0hR0aAMdiNno2ecPb5Y-8bSr4_rFsFFoM/exec';
 
 type FormState = {
     name: string;
@@ -74,8 +74,6 @@ const RSVP: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // FIX: This check for a placeholder URL was causing a TypeScript error because SCRIPT_URL is a constant with a real URL.
-        // The check is no longer needed.
         if (!validate()) {
             return;
         }
@@ -88,32 +86,33 @@ const RSVP: React.FC = () => {
         try {
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                // Google Apps Script doesn't handle CORS preflight (OPTIONS) requests well.
-                // Sending as text/plain avoids the preflight request. The script will parse the JSON string.
                 headers: {
-                    'Content-Type': 'text/plain;charset=utf-8',
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
             });
 
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                setPostSubmitMessage("Thank you! Your RSVP has been successfully recorded.");
-                setIsSuccess(true);
-                setFormData(initialFormState); // Reset form on success
+            if (response.ok) {
+                const result = await response.json();
+                if (result.status === 'success') {
+                    setPostSubmitMessage("Thank you! Your RSVP has been successfully recorded.");
+                    setIsSuccess(true);
+                    setFormData(initialFormState);
+                } else {
+                    setPostSubmitMessage(`We're sorry, there was an issue: ${result.message}. Please try again.`);
+                    setIsSuccess(false);
+                    console.error('Script Error:', result.message);
+                }
             } else {
-                throw new Error(result.message || 'An unknown error occurred on the server.');
+                 const responseText = await response.text();
+                 console.error("RSVP Submission HTTP Error:", response.status, response.statusText, responseText);
+                 setPostSubmitMessage(`We're sorry, there was a server error (${response.status}). Please try again or contact us directly.`);
+                 setIsSuccess(false);
             }
-
         } catch (error: any) {
-            setPostSubmitMessage(`We're sorry, there was an error submitting your RSVP. Please try again or contact us directly.`);
+            console.error("RSVP Submission Fetch Error:", error);
+            setPostSubmitMessage(`We're sorry, there was a network error. Please check your connection and try again.`);
             setIsSuccess(false);
-            console.error("RSVP Submission Error:", error);
         } finally {
             setIsProcessing(false);
         }
