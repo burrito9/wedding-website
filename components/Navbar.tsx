@@ -9,7 +9,6 @@ const Navbar: React.FC = () => {
         { name: 'Weekend', href: '#weekend' },
         { name: 'Wedding Day', href: '#wedding-day' },
         { name: 'RSVP', href: '#rsvp' },
-        { name: 'Registry', href: '#registry' },
         { name: 'FAQs', href: '#faq' },
     ];
 

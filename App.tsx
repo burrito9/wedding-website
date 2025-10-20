@@ -9,7 +9,6 @@ import Stay from './components/Stay';
 import Weekend from './components/Weekend';
 import WeddingDay from './components/WeddingDay';
 import RSVP from './components/RSVP';
-import Gift from './components/Gift';
 
 const App: React.FC = () => {
   return (
@@ -49,16 +48,6 @@ const App: React.FC = () => {
 
           <section id="rsvp" className="scroll-mt-20">
             <RSVP />
-          </section>
-
-          <div className="flex justify-center items-center space-x-4">
-            <Heart className="w-6 h-6 text-brand-orange opacity-70" />
-            <Heart className="w-10 h-10 text-brand-orange" />
-            <Heart className="w-6 h-6 text-brand-orange opacity-70" />
-          </div>
-
-          <section id="registry" className="scroll-mt-20">
-            <Gift />
           </section>
           
           <FAQ />
