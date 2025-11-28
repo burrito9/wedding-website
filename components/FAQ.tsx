@@ -77,6 +77,19 @@ const faqData = [
             </ul>
         </>
     )
+  },
+  {
+    question: "Do you have a registry?",
+    answer: (
+        <>
+            <p>
+                Yes we are registered at <a href="https://heathceramics.myshopify.com/apps/registry/mila-roberto-wedding?shared_url=true" target="_blank" rel="noopener noreferrer" className="text-brand-orange underline hover:text-orange-700">Heath</a> and <a href="https://www.zola.com/registry/robertoandmila" target="_blank" rel="noopener noreferrer" className="text-brand-orange underline hover:text-orange-700">Zola</a>.
+            </p>
+            <p className="mt-4">
+                However, we know many will be traveling far to celebrate with us, and your presence on the dance floor is the greatest gift of all. If you want to get us a gift, we especially appreciate contributions to our honeymoon fund. But seriously - we just want to see you there. ❤️
+            </p>
+        </>
+    )
   }
 ];
 
