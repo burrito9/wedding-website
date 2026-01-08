@@ -16,6 +16,8 @@ const faqData = [
                 <ul className="list-disc list-inside mt-2 space-y-1 text-gray-600">
                     <li>Single (one person in room): 310 euro/night</li>
                     <li>Double (two people in room): 330 euro/night</li>
+                    <li>Suite at €730/ night</li>
+                    <li>Terrace Room at €650/ night</li>
                 </ul>
             </div>
         </>

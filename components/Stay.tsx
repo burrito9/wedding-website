@@ -10,6 +10,9 @@ const Stay: React.FC = () => {
                     <p>
                         We have secured a hotel block at Octant Hotels Furnas. This hotel has breakfast included and will be in the same town as Friday/Saturday’s events. We will be running wedding day transportation from this hotel as well.
                     </p>
+                    <p className="text-brand-orange font-semibold italic">
+                        Update: we've received word from the hotel that all standard rooms in the hotel are now sold out. However, there are still suites and terrace rooms available.
+                    </p>
                     <p className="font-semibold">If you are interested in booking under our wedding block, please do the following:</p>
                     <ol className="list-decimal list-inside space-y-2 pl-4">
                         <li>Email <a href="mailto:events-furnas@octanthotels.com" className="text-brand-orange underline hover:text-orange-700">events-furnas@octanthotels.com</a> requesting your room(s) under the block.</li>
@@ -36,6 +39,9 @@ const Stay: React.FC = () => {
                     <ul className="list-disc list-inside space-y-2">
                         <li>
                             <a href="https://www.bensaudehotels.com/en/terranostragardenhotel?utm_source=triptease_attract&utm_medium=paid_search&utm_campaign=google_search&gad_source=1&gad_campaignid=20622428042&gbraid=0AAAAABfgVgVZWsnAc__V1evOD9Pk7LADD&gclid=CjwKCAjwxrLHBhA2EiwAu9EdM5Rr_56ATmbeMeaAPv095Y1PHRs_89axPHa-KbsQsdgvsdJbPYW6vhoC1xcQAvD_BwE" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-orange underline hover:text-orange-700">Terra Nostra Garden Hotel</a> - 4 min drive / 15 min walk from the Octant
+                        </li>
+                        <li>
+                            <a href="https://hotelvaleverde.com/web/index.php/en/" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-orange underline hover:text-orange-700">Hotel Vale Verde</a> - 9 min walk from the Octant
                         </li>
                         <li>
                             <a href="https://cantosgreengarden.pt/" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-orange underline hover:text-orange-700">Cantos Green Garden</a> - 3 min drive / 18 min walk from the Octant, good for groups
