@@ -11,7 +11,7 @@ const Stay: React.FC = () => {
                         We have secured a hotel block at Octant Hotels Furnas. This hotel has breakfast included and will be in the same town as Friday/Saturday’s events. We will be running wedding day transportation from this hotel as well.
                     </p>
                     <p className="text-brand-orange font-semibold italic">
-                        Update: we've received word from the hotel that all standard rooms in the hotel are now sold out. However, there are still suites and terrace rooms available.
+                        Update: there are 3 standard rooms still available in the block. Suites and terrace rooms are also still available.
                     </p>
                     <p className="font-semibold">If you are interested in booking under our wedding block, please do the following:</p>
                     <ol className="list-decimal list-inside space-y-2 pl-4">
