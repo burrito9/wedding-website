@@ -12,6 +12,13 @@ const Navbar: React.FC = () => {
         { name: 'FAQs', href: '#faq' },
     ];
 
+    const registryLinks = [
+        { name: 'Heath', href: 'https://heathceramics.myshopify.com/apps/registry/mila-roberto-wedding?shared_url=true' },
+        { name: 'Zola', href: 'https://www.zola.com/registry/robertoandmila' },
+    ];
+
+    const [isRegistryOpen, setIsRegistryOpen] = useState(false);
+
     return (
         <nav className="sticky top-0 w-full bg-brand-off-white/95 backdrop-blur-sm shadow-sm z-50 font-montserrat">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,7 +29,7 @@ const Navbar: React.FC = () => {
                         </a>
                     </div>
                     <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-4">
+                        <div className="ml-10 flex items-center space-x-4">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
@@ -32,6 +39,38 @@ const Navbar: React.FC = () => {
                                     {link.name}
                                 </a>
                             ))}
+                            
+                            {/* Registry Dropdown */}
+                            <div className="relative group">
+                                <button
+                                    onMouseEnter={() => setIsRegistryOpen(true)}
+                                    onMouseLeave={() => setIsRegistryOpen(false)}
+                                    className="text-gray-600 group-hover:text-brand-orange px-3 py-2 rounded-md text-sm font-medium tracking-wider uppercase flex items-center"
+                                >
+                                    Registry
+                                    <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                
+                                <div 
+                                    onMouseEnter={() => setIsRegistryOpen(true)}
+                                    onMouseLeave={() => setIsRegistryOpen(false)}
+                                    className={`absolute right-0 w-40 bg-white border border-gray-100 rounded-md shadow-lg py-1 transition-all duration-200 ${isRegistryOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}
+                                >
+                                    {registryLinks.map((link) => (
+                                        <a
+                                            key={link.name}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-orange"
+                                        >
+                                            {link.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="-mr-2 flex md:hidden">
@@ -70,6 +109,23 @@ const Navbar: React.FC = () => {
                                 {link.name}
                             </a>
                         ))}
+                        
+                        {/* Mobile Registry Section */}
+                        <div className="pt-2 pb-1 border-t border-gray-100">
+                            <p className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Registry</p>
+                            {registryLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-600 hover:text-brand-orange hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium pl-6"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}
