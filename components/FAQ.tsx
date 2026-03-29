@@ -44,11 +44,16 @@ const faqData = [
   {
     question: "What is the dress code?",
     answer: (
-        <ul className="list-disc list-inside space-y-2">
-         <li><span className="font-semibold">Welcome Drinks:</span> Casual, but look good.</li>
-            <li><span className="font-semibold">Sunset Party:</span> Island Disco</li>
-            <li><span className="font-semibold">Wedding:</span> Island Formal</li>
-        </ul>
+        <div className="space-y-4">
+            <ul className="list-disc list-inside space-y-2">
+                <li><span className="font-semibold">Welcome Drinks:</span> Casual, but look good.</li>
+                <li><span className="font-semibold">Sunset Party:</span> Island Disco</li>
+                <li><span className="font-semibold">Wedding:</span> Island Formal</li>
+            </ul>
+            <p className="text-sm italic text-gray-600 border-t border-gray-100 pt-4">
+                Shoes with a block heel or flats will drastically improve your weekend. Bring sunglasses and a layer for the evenings.
+            </p>
+        </div>
     )
   },
   {
@@ -103,7 +108,6 @@ const mustDos = {
     ],
     "Adventure Activities": [
         "Whale watching - the Azores are one of the world's largest whale sanctuaries.",
-        "Hiking Mount Pico - the highest point in all of Portugal.",
         "Kayaking in crater lakes and coastal waters.",
         "Surfing at spectacular beaches.",
         "Swimming with dolphins (where permitted).",
@@ -111,7 +115,6 @@ const mustDos = {
     "Unique Experiences": [
         "Eating traditional \"Cozido das Furnas\" - a hearty stew slow-cooked underground using volcanic heat.",
         "Exploring Europe's only commercial tea fields on São Miguel.",
-        "Volcanic wine tasting on Pico Island's UNESCO-recognized vineyards.",
         "Hot springs hopping across different islands.",
         "Exploring volcanic caves and lava tubes.",
     ]
