@@ -45,10 +45,19 @@ const faqData = [
     question: "What is the dress code?",
     answer: (
         <div className="space-y-4">
-            <ul className="list-disc list-inside space-y-2">
-                <li><span className="font-semibold">Welcome Drinks:</span> Casual, but look good.</li>
-                <li><span className="font-semibold">Sunset Party:</span> Island Disco</li>
-                <li><span className="font-semibold">Wedding:</span> Island Formal</li>
+            <ul className="list-disc list-inside space-y-2 text-gray-600">
+                <li>
+                    <span className="font-semibold text-gray-800">Friday Welcome Drinks:</span> Casual but look good.
+                </li>
+                <li>
+                    <span className="font-semibold text-gray-800">Saturday Beach Day:</span> Wear your bathing suits (BYO beach towel).
+                </li>
+                <li>
+                    <span className="font-semibold text-gray-800">Saturday Sunset Disco:</span> 80s disco (lean into it!). Best attire wins a mystery prize.
+                </li>
+                <li>
+                    <span className="font-semibold text-gray-800">Sunday Wedding Day:</span> Island formal, suits and dresses. Linens and colors encouraged.
+                </li>
             </ul>
             <p className="text-sm italic text-gray-600 border-t border-gray-100 pt-4">
                 Shoes with a block heel or flats will drastically improve your weekend. Bring sunglasses and a layer for the evenings.
