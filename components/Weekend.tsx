@@ -29,10 +29,10 @@ const Weekend: React.FC = () => {
                     <div className="space-y-1">
                         <p className="font-semibold">Beach Day at Ribeira Quente</p>
                         <p className="text-gray-600">1:00–4:00pm</p>
-                        <p className="text-sm italic">Short drive from the hotel.</p>
+                        <p className="text-sm italic">Short drive from the hotel. Driving encouraged, some shuttles provided.</p>
                     </div>
                     <div className="space-y-1">
-                        <p className="font-semibold">Sunset Disco Party</p>
+                        <p className="font-semibold">Sunset Disco Party at Octant Furnas</p>
                         <p className="text-gray-600">6:30–9:00pm</p>
                         <p className="text-sm italic">Food provided — come hungry</p>
                     </div>

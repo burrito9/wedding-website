@@ -117,6 +117,15 @@ const mustDos = {
         "Exploring Europe's only commercial tea fields on São Miguel.",
         "Hot springs hopping across different islands.",
         "Exploring volcanic caves and lava tubes.",
+    ],
+    "Furnas Favorites": [
+        "Poça da Dona Beija - Geothermal hot springs open late, perfect for a night soak.",
+        "Parque de Grená - Ecological park with scenic hiking trails and waterfalls.",
+        "Terra Nostra Garden Hotel & Restaurant - Large thermal pool, botanical gardens, and refined dining.",
+        "Tony's - Classic town-center spot famous for Cozido (traditional stew cooked in volcanic ground).",
+        "Furnas Lake Restaurant - Great finer dining located by the lake.",
+        "Queijaria Furnense - Shop with local artisanal cheeses crafted using thermal water.",
+        "Espinha Cocktail Bar - Cozy spot for great craft cocktails.",
     ]
 };
 

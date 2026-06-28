@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { fallbackGuestList } from '../data/guestlist';
 
 // The URL for the deployed Google Apps Script. It handles both GET and POST.
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbygA4iuGdrdtgtXCVI_074UGwBzla2IE2XONixfN0T5sx0Fbz1VNQza-cTjIrc06r8c/exec';
@@ -54,12 +55,12 @@ const RSVP: React.FC = () => {
                 if (result.result === 'success') {
                     setGuestList(result.data);
                 } else {
-                    console.error("Error fetching guest list:", result.error);
-                    setErrors({ verification: "Could not load the guest list. Please try refreshing." });
+                    console.warn("Error fetching guest list, using fallback:", result.error);
+                    setGuestList(fallbackGuestList);
                 }
             } catch (error) {
-                console.error("Fetch Guest List Error:", error);
-                setErrors({ verification: "Could not connect to the guest list service." });
+                console.warn("Fetch Guest List Error, using offline fallback:", error);
+                setGuestList(fallbackGuestList);
             } finally {
                 setIsLoadingGuestList(false);
             }
